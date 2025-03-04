@@ -5,11 +5,13 @@ namespace RemoteTimer
 {
     internal static class Program
     {
+        public static DatabaseLoader DBLoader = new DatabaseLoader();
+
         [STAThread]
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new DatabaseConnectionForm());
+            Application.Run(new MainForm());
         }
     }
 }
