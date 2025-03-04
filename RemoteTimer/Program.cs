@@ -1,3 +1,5 @@
+using RemoteTimer.Database;
+
 namespace RemoteTimer
 {
     internal static class Program
@@ -7,6 +9,8 @@ namespace RemoteTimer
         {
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm());
+
+            DatabaseConnection Connection = new DatabaseConnection();
         }
     }
 }
