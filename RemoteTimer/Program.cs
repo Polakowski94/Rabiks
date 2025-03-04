@@ -1,4 +1,5 @@
-using RemoteTimer.Database;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using RemoteTimer.Forms;
 
 namespace RemoteTimer
 {
@@ -8,9 +9,7 @@ namespace RemoteTimer
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
-
-            DatabaseConnection Connection = new DatabaseConnection();
+            Application.Run(new DatabaseConnectionForm());
         }
     }
 }

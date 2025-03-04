@@ -52,6 +52,7 @@
             this.StartWorkButton.TabIndex = 0;
             this.StartWorkButton.Text = "Start";
             this.StartWorkButton.UseVisualStyleBackColor = true;
+            this.StartWorkButton.Click += OnStartWorkButtonClick;
             // 
             // StopWorkButton
             // 
@@ -62,6 +63,7 @@
             this.StopWorkButton.TabIndex = 1;
             this.StopWorkButton.Text = "Stop";
             this.StopWorkButton.UseVisualStyleBackColor = true;
+            this.StopWorkButton.Click += OnStopWorkButtonClick;
             // 
             // StartBreakButton
             // 
@@ -72,6 +74,7 @@
             this.StartBreakButton.TabIndex = 2;
             this.StartBreakButton.Text = "Start";
             this.StartBreakButton.UseVisualStyleBackColor = true;
+            this.StartBreakButton.Click += OnStartBreakButtonClick;
             // 
             // StopBreakButton
             // 
@@ -82,6 +85,7 @@
             this.StopBreakButton.TabIndex = 3;
             this.StopBreakButton.Text = "Stop";
             this.StopBreakButton.UseVisualStyleBackColor = true;
+            this.StopBreakButton.Click += OnStopBreakButtonClick;
             // 
             // textBox1
             // 

@@ -12,7 +12,7 @@ namespace RemoteTimer.Forms
 {
     public partial class DatabaseConnectionForm: Form
     {
-        private string Path;
+        private string Path = string.Empty;
 
         public DatabaseConnectionForm()
         {
@@ -24,7 +24,7 @@ namespace RemoteTimer.Forms
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "MDF Databases (*.mdf)";
+                openFileDialog.Filter = "MDF Databases (*.mdf)|*.mdf";
                 openFileDialog.RestoreDirectory = true;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -39,7 +39,7 @@ namespace RemoteTimer.Forms
 
         private void OnConnectButtonClick(object sender, System.EventArgs e)
         {
-
+            
         }
     }
 }
