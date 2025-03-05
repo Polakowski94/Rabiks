@@ -44,8 +44,8 @@
             this.TotalTime = new DataGridViewTextBoxColumn();
             this.Toll = new DataGridViewTextBoxColumn();
             this.SummaryLabel = new Label();
-            this.WorkTimer = new TextBox();
-            this.BreakTimer = new TextBox();
+            this.WorkTimerTextBox = new TextBox();
+            this.BreakTimerTextBox = new TextBox();
             this.TodayGrid = new DataGridView();
             this.TodayUsername = new DataGridViewTextBoxColumn();
             this.Type = new DataGridViewTextBoxColumn();
@@ -71,6 +71,7 @@
             // StopWorkButton
             // 
             this.StopWorkButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.StopWorkButton.Enabled = false;
             this.StopWorkButton.Location = new Point(606, 12);
             this.StopWorkButton.Name = "StopWorkButton";
             this.StopWorkButton.Size = new Size(49, 23);
@@ -93,6 +94,7 @@
             // StopBreakButton
             // 
             this.StopBreakButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.StopBreakButton.Enabled = false;
             this.StopBreakButton.Location = new Point(606, 41);
             this.StopBreakButton.Name = "StopBreakButton";
             this.StopBreakButton.Size = new Size(49, 23);
@@ -195,21 +197,27 @@
             this.SummaryLabel.TabIndex = 9;
             this.SummaryLabel.Text = "Summary";
             // 
-            // WorkTimer
+            // WorkTimerTextBox
             // 
-            this.WorkTimer.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            this.WorkTimer.Location = new Point(661, 12);
-            this.WorkTimer.Name = "WorkTimer";
-            this.WorkTimer.Size = new Size(58, 23);
-            this.WorkTimer.TabIndex = 10;
+            this.WorkTimerTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.WorkTimerTextBox.Location = new Point(661, 12);
+            this.WorkTimerTextBox.Name = "WorkTimerTextBox";
+            this.WorkTimerTextBox.ReadOnly = true;
+            this.WorkTimerTextBox.Size = new Size(58, 23);
+            this.WorkTimerTextBox.TabIndex = 10;
+            this.WorkTimerTextBox.Text = "00:00:00";
+            this.WorkTimerTextBox.TextAlign = HorizontalAlignment.Right;
             // 
-            // BreakTimer
+            // BreakTimerTextBox
             // 
-            this.BreakTimer.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            this.BreakTimer.Location = new Point(661, 40);
-            this.BreakTimer.Name = "BreakTimer";
-            this.BreakTimer.Size = new Size(58, 23);
-            this.BreakTimer.TabIndex = 11;
+            this.BreakTimerTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.BreakTimerTextBox.Location = new Point(661, 40);
+            this.BreakTimerTextBox.Name = "BreakTimerTextBox";
+            this.BreakTimerTextBox.ReadOnly = true;
+            this.BreakTimerTextBox.Size = new Size(58, 23);
+            this.BreakTimerTextBox.TabIndex = 11;
+            this.BreakTimerTextBox.Text = "00:00:00";
+            this.BreakTimerTextBox.TextAlign = HorizontalAlignment.Right;
             // 
             // TodayGrid
             // 
@@ -272,8 +280,8 @@
             this.ClientSize = new Size(728, 299);
             this.Controls.Add(this.TodayLabel);
             this.Controls.Add(this.TodayGrid);
-            this.Controls.Add(this.BreakTimer);
-            this.Controls.Add(this.WorkTimer);
+            this.Controls.Add(this.BreakTimerTextBox);
+            this.Controls.Add(this.WorkTimerTextBox);
             this.Controls.Add(this.SummaryLabel);
             this.Controls.Add(this.SummaryGrid);
             this.Controls.Add(this.BreakLabel);
@@ -305,8 +313,8 @@
         private Label BreakLabel;
         private DataGridView SummaryGrid;
         private Label SummaryLabel;
-        private TextBox WorkTimer;
-        private TextBox BreakTimer;
+        private TextBox WorkTimerTextBox;
+        private TextBox BreakTimerTextBox;
         private DataGridView TodayGrid;
         private Label TodayLabel;
         private DataGridViewTextBoxColumn SummaryUsername;
