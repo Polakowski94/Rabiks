@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
-namespace RemoteTimer.Models.DataLayer;
+namespace RemoteTimer.Database;
 
 public partial class RemoteTimerDatabaseContext : DbContext
 {
     public RemoteTimerDatabaseContext()
     {
-
     }
 
     public RemoteTimerDatabaseContext(DbContextOptions<RemoteTimerDatabaseContext> options)
         : base(options)
     {
-
     }
 
     public virtual DbSet<BreakRegistration> BreakRegistrations { get; set; }
@@ -25,15 +21,13 @@ public partial class RemoteTimerDatabaseContext : DbContext
 
     public virtual DbSet<WorkDaySummary> WorkDaySummaries { get; set; }
 
+    public virtual DbSet<WorkDaySummaryView> WorkDaySummaryViews { get; set; }
+
     public virtual DbSet<WorkRegistration> WorkRegistrations { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (optionsBuilder.IsConfigured == false)
-        {
-            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
-        }
-    }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB; AttachDBFilename=D:\\Repos\\Database\\RemoteTimerDatabase.mdf;Integrated security=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -61,6 +55,11 @@ public partial class RemoteTimerDatabaseContext : DbContext
             entity.HasOne(d => d.UsernameNavigation).WithMany(p => p.WorkDaySummaries)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_WorkDaySummary_User");
+        });
+
+        modelBuilder.Entity<WorkDaySummaryView>(entity =>
+        {
+            entity.ToView("WorkDaySummaryView");
         });
 
         modelBuilder.Entity<WorkRegistration>(entity =>

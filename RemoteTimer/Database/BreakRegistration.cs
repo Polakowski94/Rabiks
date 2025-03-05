@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace RemoteTimer.Models.DataLayer;
+namespace RemoteTimer.Database;
 
-[Table("WorkDaySummary")]
-public partial class WorkDaySummary
+[Table("BreakRegistration")]
+public partial class BreakRegistration
 {
     [Key]
     public int Id { get; set; }
@@ -16,17 +16,17 @@ public partial class WorkDaySummary
     [Unicode(false)]
     public string Username { get; set; } = null!;
 
-    public DateOnly? Day { get; set; }
+    [Column(TypeName = "datetime")]
+    public DateTime Start { get; set; }
 
-    public TimeOnly? WorkTime { get; set; }
+    [Column(TypeName = "datetime")]
+    public DateTime? Stop { get; set; }
 
-    public TimeOnly? BreakTime { get; set; }
-
-    public TimeOnly? TotalTime { get; set; }
-
-    public TimeOnly? Toll { get; set; }
+    [StringLength(1024)]
+    [Unicode(false)]
+    public string Description { get; set; } = null!;
 
     [ForeignKey("Username")]
-    [InverseProperty("WorkDaySummaries")]
+    [InverseProperty("BreakRegistrations")]
     public virtual User UsernameNavigation { get; set; } = null!;
 }

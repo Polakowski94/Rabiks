@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace RemoteTimer.Models.DataLayer;
+namespace RemoteTimer.Database;
 
 [Table("WorkRegistration")]
 public partial class WorkRegistration
