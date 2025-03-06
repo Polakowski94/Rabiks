@@ -53,6 +53,7 @@
             this.Stop = new DataGridViewTextBoxColumn();
             this.Description = new DataGridViewTextBoxColumn();
             this.TodayLabel = new Label();
+            this.RefreshButton = new Button();
             ((System.ComponentModel.ISupportInitialize)this.SummaryGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.PresentDayGrid).BeginInit();
             SuspendLayout();
@@ -273,11 +274,23 @@
             this.TodayLabel.TabIndex = 13;
             this.TodayLabel.Text = "Today";
             // 
+            // RefreshButton
+            // 
+            this.RefreshButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            this.RefreshButton.Location = new Point(12, 264);
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.Size = new Size(56, 23);
+            this.RefreshButton.TabIndex = 14;
+            this.RefreshButton.Text = "Refresh";
+            this.RefreshButton.UseVisualStyleBackColor = true;
+            this.RefreshButton.Click += OnRefreshButtonClick;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.ClientSize = new Size(728, 299);
+            this.Controls.Add(this.RefreshButton);
             this.Controls.Add(this.TodayLabel);
             this.Controls.Add(this.PresentDayGrid);
             this.Controls.Add(this.BreakTimerTextBox);
@@ -328,5 +341,6 @@
         private DataGridViewTextBoxColumn Start;
         private DataGridViewTextBoxColumn Stop;
         private DataGridViewTextBoxColumn Description;
+        private Button RefreshButton;
     }
 }

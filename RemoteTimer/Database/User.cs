@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,9 +20,6 @@ public partial class User
 
     [InverseProperty("UsernameNavigation")]
     public virtual ICollection<BreakRegistration> BreakRegistrations { get; set; } = new List<BreakRegistration>();
-
-    [InverseProperty("UsernameNavigation")]
-    public virtual ICollection<WorkDaySummary> WorkDaySummaries { get; set; } = new List<WorkDaySummary>();
 
     [InverseProperty("UsernameNavigation")]
     public virtual ICollection<WorkRegistration> WorkRegistrations { get; set; } = new List<WorkRegistration>();

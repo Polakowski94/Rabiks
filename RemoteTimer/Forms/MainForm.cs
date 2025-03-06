@@ -1,13 +1,15 @@
 using RemoteTimer.Database;
-using RemoteTimer.Registers;
 using RemoteTimer.Clock;
+using RemoteTimer.Loaders;
+using Microsoft.Win32;
 
 namespace RemoteTimer
 {
     public partial class MainForm : Form
     {
-        private PresentDayTimeRegister PresentDayRegister { get; set; }
-        private WorkDaySummaryRegister SummaryRegister { get; set; }
+        private WorkRegister Register { get; set; }
+        private PresentDayGridLoader PresentDayLoader { get; set; }
+        private SummaryGridLoader SummaryLoader { get; set; }
 
         private RemoteTimerClock WorkClock { get; set; }
         private RemoteTimerClock BreakClock { get; set; }
@@ -16,8 +18,11 @@ namespace RemoteTimer
         {
             InitializeComponent();
 
-            PresentDayRegister = new PresentDayTimeRegister(PresentDayGrid);
-            SummaryRegister = new WorkDaySummaryRegister(SummaryGrid);
+            Register = new WorkRegister();
+            PresentDayLoader = new PresentDayGridLoader(PresentDayGrid);
+            PresentDayLoader.Load();
+            SummaryLoader = new SummaryGridLoader(SummaryGrid);
+            SummaryLoader.Load();
 
             WorkClock = new RemoteTimerClock(WorkTimerTextBox, UpdateTimer);
             BreakClock = new RemoteTimerClock(BreakTimerTextBox, UpdateTimer);
@@ -27,7 +32,7 @@ namespace RemoteTimer
         {
             WorkClock.Start();
             WorkRegistration registration = new WorkRegistration { Start = WorkClock.StartTime, Description = WorkDescriptionTextBox.Text };
-            PresentDayRegister.RegisterWork(registration);
+            Register.RegisterWork(registration);
 
             HandleControlsOnTimerStart(WorkDescriptionTextBox, StartWorkButton, StopWorkButton);
         }
@@ -36,8 +41,7 @@ namespace RemoteTimer
         {
             WorkClock.Stop();
             WorkRegistration registration = new WorkRegistration { Start = WorkClock.StartTime, Stop = DateTime.Now };
-            PresentDayRegister.RegisterWork(registration);
-            SummaryRegister.RegisterWork(registration);
+            Register.RegisterWork(registration);
 
             HandleControlsOnTimerStop(WorkDescriptionTextBox, StartWorkButton, StopWorkButton, WorkTimerTextBox);
         }
@@ -46,7 +50,7 @@ namespace RemoteTimer
         {
             BreakClock.Start();
             BreakRegistration registration = new BreakRegistration { Start = BreakClock.StartTime, Description = BreakDescriptionTextBox.Text };
-            PresentDayRegister.RegisterBreak(registration);
+            Register.RegisterBreak(registration);
 
             HandleControlsOnTimerStart(BreakDescriptionTextBox, StartBreakButton, StopBreakButton);
         }
@@ -55,8 +59,7 @@ namespace RemoteTimer
         {
             BreakClock.Stop();
             BreakRegistration registration = new BreakRegistration { Start = BreakClock.StartTime, Stop = DateTime.Now };
-            PresentDayRegister.RegisterBreak(registration);
-            SummaryRegister.RegisterBreak(registration);
+            Register.RegisterBreak(registration);
 
             HandleControlsOnTimerStop(BreakDescriptionTextBox, StartBreakButton, StopBreakButton, BreakTimerTextBox);
         }
@@ -66,6 +69,8 @@ namespace RemoteTimer
             descriptionTextBox.Enabled = false;
             startButton.Enabled = false;
             stopButton.Enabled = true;
+
+            PresentDayLoader.Load();
         }
 
         private void HandleControlsOnTimerStop(TextBox descriptionTextBox, Button startButton, Button stopButton, TextBox timerTextBox)
@@ -75,6 +80,9 @@ namespace RemoteTimer
             startButton.Enabled = true;
             stopButton.Enabled = false;
             UpdateTimer(timerTextBox, 0);
+
+            PresentDayLoader.Load();
+            SummaryLoader.Load();
         }
 
         private void UpdateTimer(TextBox timerTextBox, int seconds)
@@ -88,6 +96,12 @@ namespace RemoteTimer
             {
                 timerTextBox.Text = TimeSpan.FromSeconds(seconds).ToString(@"hh\:mm\:ss");
             }
+        }
+
+        private void OnRefreshButtonClick(object sender, EventArgs e)
+        {
+            PresentDayLoader.Load();
+            SummaryLoader.Load();
         }
     }
 }

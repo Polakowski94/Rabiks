@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace RemoteTimer.Database;
@@ -17,8 +19,6 @@ public partial class RemoteTimerDatabaseContext : DbContext
     public virtual DbSet<BreakRegistration> BreakRegistrations { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
-
-    public virtual DbSet<WorkDaySummary> WorkDaySummaries { get; set; }
 
     public virtual DbSet<WorkDaySummaryView> WorkDaySummaryViews { get; set; }
 
@@ -44,15 +44,6 @@ public partial class RemoteTimerDatabaseContext : DbContext
 
             entity.Property(e => e.Username).HasDefaultValue("user");
             entity.Property(e => e.Password).HasDefaultValue("password");
-        });
-
-        modelBuilder.Entity<WorkDaySummary>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__WorkDayS__3214EC07C90E53CF");
-
-            entity.HasOne(d => d.UsernameNavigation).WithMany(p => p.WorkDaySummaries)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_WorkDaySummary_User");
         });
 
         modelBuilder.Entity<WorkDaySummaryView>(entity =>
