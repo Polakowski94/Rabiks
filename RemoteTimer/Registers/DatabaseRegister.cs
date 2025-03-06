@@ -1,14 +1,15 @@
 ﻿using RemoteTimer.Database;
 
-namespace RemoteTimer.GridHandlers
+namespace RemoteTimer.Registers
 {
-    public abstract class GridHandler
+    public abstract class DatabaseRegister
     {
         protected DataGridView Grid { get; private set; }
         protected RemoteTimerDatabaseContext DBContext { get; private set; }
         protected User? ActiveUser { get; private set; }
+        protected int SortColumnIndex { get; set; }
 
-        public GridHandler(DataGridView grid)
+        public DatabaseRegister(DataGridView grid)
         {
             Grid = grid;
             DBContext = new RemoteTimerDatabaseContext();
@@ -18,6 +19,10 @@ namespace RemoteTimer.GridHandlers
         }
 
         public abstract void LoadGrid();
+
+        public abstract void RegisterWork(WorkRegistration registration);
+
+        public abstract void RegisterBreak(BreakRegistration registration);
 
         protected void RefreshGrid()
         {

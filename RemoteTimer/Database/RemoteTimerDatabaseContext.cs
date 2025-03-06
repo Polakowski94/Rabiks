@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace RemoteTimer.Database;
@@ -26,8 +25,7 @@ public partial class RemoteTimerDatabaseContext : DbContext
     public virtual DbSet<WorkRegistration> WorkRegistrations { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB; AttachDBFilename=D:\\Repos\\Database\\RemoteTimerDatabase.mdf;Integrated security=True");
+        => optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

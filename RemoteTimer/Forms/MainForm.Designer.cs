@@ -46,7 +46,7 @@
             this.SummaryLabel = new Label();
             this.WorkTimerTextBox = new TextBox();
             this.BreakTimerTextBox = new TextBox();
-            this.TodayGrid = new DataGridView();
+            this.PresentDayGrid = new DataGridView();
             this.TodayUsername = new DataGridViewTextBoxColumn();
             this.Type = new DataGridViewTextBoxColumn();
             this.Start = new DataGridViewTextBoxColumn();
@@ -54,7 +54,7 @@
             this.Description = new DataGridViewTextBoxColumn();
             this.TodayLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)this.SummaryGrid).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.TodayGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.PresentDayGrid).BeginInit();
             SuspendLayout();
             // 
             // StartWorkButton
@@ -219,19 +219,19 @@
             this.BreakTimerTextBox.Text = "00:00:00";
             this.BreakTimerTextBox.TextAlign = HorizontalAlignment.Right;
             // 
-            // TodayGrid
+            // PresentDayGrid
             // 
-            this.TodayGrid.AllowUserToAddRows = false;
-            this.TodayGrid.AllowUserToDeleteRows = false;
-            this.TodayGrid.AllowUserToOrderColumns = true;
-            this.TodayGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            this.TodayGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.TodayGrid.Columns.AddRange(new DataGridViewColumn[] { this.TodayUsername, this.Type, this.Start, this.Stop, this.Description });
-            this.TodayGrid.Location = new Point(76, 70);
-            this.TodayGrid.Name = "TodayGrid";
-            this.TodayGrid.ReadOnly = true;
-            this.TodayGrid.Size = new Size(643, 105);
-            this.TodayGrid.TabIndex = 12;
+            this.PresentDayGrid.AllowUserToAddRows = false;
+            this.PresentDayGrid.AllowUserToDeleteRows = false;
+            this.PresentDayGrid.AllowUserToOrderColumns = true;
+            this.PresentDayGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            this.PresentDayGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.PresentDayGrid.Columns.AddRange(new DataGridViewColumn[] { this.TodayUsername, this.Type, this.Start, this.Stop, this.Description });
+            this.PresentDayGrid.Location = new Point(76, 70);
+            this.PresentDayGrid.Name = "PresentDayGrid";
+            this.PresentDayGrid.ReadOnly = true;
+            this.PresentDayGrid.Size = new Size(643, 105);
+            this.PresentDayGrid.TabIndex = 12;
             // 
             // TodayUsername
             // 
@@ -279,7 +279,7 @@
             this.AutoScaleMode = AutoScaleMode.Font;
             this.ClientSize = new Size(728, 299);
             this.Controls.Add(this.TodayLabel);
-            this.Controls.Add(this.TodayGrid);
+            this.Controls.Add(this.PresentDayGrid);
             this.Controls.Add(this.BreakTimerTextBox);
             this.Controls.Add(this.WorkTimerTextBox);
             this.Controls.Add(this.SummaryLabel);
@@ -296,7 +296,7 @@
             this.Name = "MainForm";
             this.Text = "Remote Timer";
             ((System.ComponentModel.ISupportInitialize)this.SummaryGrid).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.TodayGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.PresentDayGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -315,7 +315,7 @@
         private Label SummaryLabel;
         private TextBox WorkTimerTextBox;
         private TextBox BreakTimerTextBox;
-        private DataGridView TodayGrid;
+        private DataGridView PresentDayGrid;
         private Label TodayLabel;
         private DataGridViewTextBoxColumn SummaryUsername;
         private DataGridViewTextBoxColumn Day;

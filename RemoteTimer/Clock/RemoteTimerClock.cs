@@ -9,13 +9,15 @@ namespace RemoteTimer.Clock
 {
     public class RemoteTimerClock
     {
-        public Action<int> OnStopwatchSecondPassed;
+        public Action<TextBox, int> OnStopwatchSecondPassed;
       
         public DateTime StartTime { get; private set; }
+        private TextBox TimerTextBox { get; set; }
         private Thread StopwatchThread { get; set; }
 
-        public RemoteTimerClock(Action<int> updateTimerMethod)
+        public RemoteTimerClock(TextBox timerTextBox, Action<TextBox, int> updateTimerMethod)
         {
+            TimerTextBox = timerTextBox;
             OnStopwatchSecondPassed += updateTimerMethod;
         }
 
@@ -47,7 +49,7 @@ namespace RemoteTimer.Clock
                 }
 
                 secondsPassed++;
-                OnStopwatchSecondPassed.Invoke(secondsPassed);
+                OnStopwatchSecondPassed.Invoke(TimerTextBox, secondsPassed);
             }
         }
     }

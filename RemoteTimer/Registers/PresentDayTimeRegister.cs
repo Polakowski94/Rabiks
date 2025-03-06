@@ -1,19 +1,25 @@
-﻿using RemoteTimer.Database;
+﻿using System.Configuration;
+using RemoteTimer.Database;
 
-namespace RemoteTimer.GridHandlers
+namespace RemoteTimer.Registers
 {
-    public class TodayGridHandler : GridHandler
+    public class PresentDayTimeRegister : DatabaseRegister
     {
+        private const string WORK_LABEL = "Work";
+        private const string BREAK_LABEL = "Break";
+
         private List<WorkRegistration> WorkRegistrations { get; set; }
         private List<BreakRegistration> BreakRegistrations { get; set; }
 
-        public TodayGridHandler(DataGridView grid) : base(grid)
+        public PresentDayTimeRegister(DataGridView grid) : base(grid)
         {
             WorkRegistrations = new List<WorkRegistration>();
             BreakRegistrations = new List<BreakRegistration>();
+
+            SortColumnIndex = Int32.Parse(ConfigurationManager.AppSettings.Get("TodayGridSortColumn"));
         }
 
-        public void RegisterWork(WorkRegistration registration)
+        public override void RegisterWork(WorkRegistration registration)
         {
             registration.UsernameNavigation = ActiveUser;
 
@@ -36,7 +42,7 @@ namespace RemoteTimer.GridHandlers
             LoadGrid();
         }
 
-        public void RegisterBreak(BreakRegistration registration)
+        public override void RegisterBreak(BreakRegistration registration)
         {
             registration.UsernameNavigation = ActiveUser;
 
@@ -78,7 +84,7 @@ namespace RemoteTimer.GridHandlers
         {
             foreach (WorkRegistration registration in WorkRegistrations)
             {
-                Grid.Rows.Add(registration.Username, "Work", registration.Start, registration.Stop, registration.Description);
+                Grid.Rows.Add(registration.Username, WORK_LABEL, registration.Start, registration.Stop, registration.Description);
             }
         }
 
@@ -86,7 +92,7 @@ namespace RemoteTimer.GridHandlers
         {
             foreach (BreakRegistration registration in BreakRegistrations)
             {
-                Grid.Rows.Add(registration.Username, "Break", registration.Start, registration.Stop, registration.Description);
+                Grid.Rows.Add(registration.Username, BREAK_LABEL, registration.Start, registration.Stop, registration.Description);
             }
         }
     }
